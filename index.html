@@ -6,16 +6,16 @@
   --void:    #0a0705;
   --deep:    #131009;
   --surface: #1c1510;
-  --ember:   #7a1212;
-  --ember-hi:#a01a1a;
+  --ember:   #d44040;
+  --ember-hi:#e86060;
   --bone:    #c4b49a;
   --parchment:#d4c5a9;
   --gold:    #9a7320;
   --gold-hi: #c49a2a;
   --sea:     #0d1f2a;
-  --fog:     #4a3e34;
-  --text:    #c8b5a2;
-  --text-hi: #ddd0c0;
+  --fog:     #8a7a6a;
+  --text:    #d8c8b5;
+  --text-hi: #eee0ce;
   --f-display:"Palatino Linotype","Palatino","Book Antiqua",Georgia,serif;
   --f-body:  Georgia,"Times New Roman",serif;
   --f-mono:  "Courier New",Courier,monospace;
@@ -48,7 +48,7 @@ body {
   display:flex; flex-direction:column;
   align-items:center; gap:.9rem;
 }
-.c-nav-line { width:1px; height:1.8rem; background:var(--fog); opacity:.5; }
+.c-nav-line { width:1px; height:1.8rem; background:rgba(138,122,106,.4); }
 .c-nav-dot {
   width:5px; height:5px;
   background:var(--fog); border-radius:50%;
@@ -112,7 +112,7 @@ body {
 .hero-deck {
   font-family:var(--f-display); font-style:italic;
   font-size:clamp(.95rem,2.2vw,1.3rem);
-  color:var(--fog); max-width:46ch;
+  color:var(--text); max-width:46ch;
   line-height:1.65; position:relative; z-index:1;
   opacity:0; animation:fadeUp .9s ease forwards 1.3s;
   margin-top:1.8rem;
@@ -170,7 +170,7 @@ body {
 
 .eyebrow {
   display:block; font-family:var(--f-mono);
-  font-size:.6rem; letter-spacing:.3em;
+  font-size:.6rem; letter-spacing:.3em; font-weight:700;
   text-transform:uppercase; color:var(--ember);
   margin-bottom:1.1rem;
 }
@@ -215,15 +215,15 @@ body {
 /* ── BURIED SECRET ── */
 .secret {
   margin-top:2.2rem; max-width:60ch;
-  border:1px solid var(--fog); cursor:pointer;
+  border:1px solid rgba(138,122,106,.5); cursor:pointer;
   transition:border-color .25s;
 }
 .secret:hover { border-color:var(--ember); }
 .secret-hd {
   display:flex; align-items:center; gap:.8rem;
   padding:.9rem 1.1rem;
-  font-family:var(--f-mono); font-size:.6rem;
-  letter-spacing:.25em; text-transform:uppercase; color:var(--fog);
+  font-family:var(--f-mono); font-size:.6rem; font-weight:600;
+  letter-spacing:.25em; text-transform:uppercase; color:var(--text);
   user-select:none;
 }
 .secret-hd::before {
@@ -234,11 +234,34 @@ body {
 .secret.open .secret-hd::before { transform:rotate(0deg); }
 .secret-body {
   display:none; padding:.9rem 1.1rem 1.1rem;
-  border-top:1px solid var(--fog);
-  font-family:var(--f-mono); font-size:.78rem;
+  border-top:1px solid rgba(138,122,106,.4);
+  font-family:var(--f-mono); font-size:.8rem;
   line-height:1.75; color:var(--bone);
 }
 .secret.open .secret-body { display:block; }
+
+/* ── VOCABULARY TOOLTIPS ── */
+.term {
+  color:var(--bone);
+  border-bottom:1px dotted rgba(138,122,106,.8);
+  cursor:help; position:relative;
+  display:inline;
+}
+.term .tip {
+  position:absolute;
+  bottom:calc(100% + 10px); left:50%;
+  transform:translateX(-50%);
+  background:#1e1812; border:1px solid rgba(138,122,106,.6);
+  color:var(--text-hi);
+  font-family:var(--f-mono); font-style:normal;
+  font-size:.72rem; line-height:1.65;
+  padding:.65rem .95rem; width:220px;
+  pointer-events:none; opacity:0;
+  transition:opacity .2s; z-index:500;
+  white-space:normal; text-align:left;
+}
+.term:hover .tip,
+.term.show .tip { opacity:1; }
 
 /* ── CHAPTER BACKGROUNDS ── */
 #ch1 { background:linear-gradient(180deg, var(--void) 0%, rgba(13,31,42,.25) 50%, var(--void) 100%); }
@@ -251,7 +274,7 @@ body {
 .stat-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
-  background:var(--fog); gap:1px; border:1px solid var(--fog);
+  background:rgba(138,122,106,.3); gap:1px; border:1px solid rgba(138,122,106,.3);
   margin:2.2rem 0; max-width:60ch;
 }
 .stat-cell {
@@ -292,10 +315,10 @@ body {
 .atk-row {
   display:grid; grid-template-columns:5.5rem 1fr;
   gap:1.5rem; padding:.75rem 0;
-  border-top:1px solid rgba(74,62,52,.35); align-items:start;
+  border-top:1px solid rgba(138,122,106,.25); align-items:start;
 }
 .atk-yr {
-  font-family:var(--f-mono); font-size:.85rem;
+  font-family:var(--f-mono); font-size:.85rem; font-weight:700;
   color:var(--ember); font-variant-numeric:tabular-nums;
   padding-top:.1rem;
 }
@@ -304,8 +327,8 @@ body {
 /* ── DRAGUT DOSSIER ── */
 .dossier {
   font-family:var(--f-mono); font-size:.73rem;
-  line-height:1.85; color:var(--fog);
-  border:1px solid var(--fog); padding:1.4rem;
+  line-height:1.85; color:var(--text);
+  border:1px solid rgba(138,122,106,.4); padding:1.4rem;
   margin:2.2rem 0; max-width:60ch; position:relative;
 }
 .dossier::before {
@@ -350,8 +373,8 @@ body {
 }
 .battle-grid {
   display:grid; grid-template-columns:1fr 1fr;
-  gap:1px; background:var(--fog);
-  border:1px solid var(--fog); margin:2.2rem 0;
+  gap:1px; background:rgba(138,122,106,.3);
+  border:1px solid rgba(138,122,106,.3); margin:2.2rem 0;
 }
 .b-cell { background:var(--void); padding:.9rem; }
 .b-side {
@@ -368,6 +391,38 @@ body {
   color:var(--fog); margin-top:.15rem;
 }
 
+/* ── HEIGHT COMPARISON ── */
+.height-cmp {
+  display:flex; align-items:flex-end; gap:2.5rem;
+  margin:2.2rem 0; padding:.5rem 0;
+}
+.hc-col { display:flex; flex-direction:column; align-items:center; gap:.5rem; }
+.hc-bar {
+  width:2rem; background:var(--fog); opacity:.7;
+  transition:opacity .2s;
+}
+.hc-col:hover .hc-bar { opacity:1; }
+.hc-bar.red { background:var(--ember); opacity:.8; }
+.hc-col:hover .hc-bar.red { opacity:1; }
+.hc-top {
+  font-family:var(--f-mono); font-size:.58rem;
+  color:var(--fog); text-align:center;
+}
+.hc-col:hover .hc-top { color:var(--text); }
+.hc-top.red { color:var(--ember); }
+.hc-col:hover .hc-top.red { color:var(--ember-hi); }
+.hc-bot {
+  font-family:var(--f-mono); font-size:.6rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--fog); text-align:center; max-width:7rem;
+  line-height:1.5;
+}
+.hc-note {
+  font-family:var(--f-mono); font-size:.65rem;
+  color:var(--fog); line-height:1.7;
+  align-self:center; padding-bottom:2rem;
+}
+
 /* ── TIMELINE ── */
 #tl { background:var(--deep); padding:6rem 0; }
 .tl-hd { text-align:center; margin-bottom:3rem; }
@@ -380,11 +435,11 @@ body {
 .tl-scroll {
   overflow-x:auto; padding:3rem 4rem 2.5rem;
   cursor:grab; user-select:none;
-  scrollbar-color:var(--fog) var(--deep);
+  scrollbar-color:rgba(138,122,106,.4) var(--deep);
 }
 .tl-scroll::-webkit-scrollbar { height:3px; }
 .tl-scroll::-webkit-scrollbar-track { background:var(--deep); }
-.tl-scroll::-webkit-scrollbar-thumb { background:var(--fog); }
+.tl-scroll::-webkit-scrollbar-thumb { background:rgba(138,122,106,.5); }
 .tl-scroll:active { cursor:grabbing; }
 .tl-track {
   display:flex; min-width:max-content;
@@ -392,10 +447,11 @@ body {
 }
 .tl-track::before {
   content:''; position:absolute; top:0; left:0; right:0;
-  height:1px; background:var(--fog); opacity:.4;
+  height:1px; background:rgba(138,122,106,.35);
 }
 .tl-era {
   padding:0 2.5rem; position:relative; min-width:185px;
+  cursor:pointer;
 }
 .tl-era::after {
   content:''; position:absolute;
@@ -403,9 +459,10 @@ body {
   width:6px; height:6px; background:var(--fog); border-radius:50%;
   transition:background .2s;
 }
-.tl-era:hover::after { background:var(--ember); }
+.tl-era:hover::after,
+.tl-era.open::after { background:var(--ember); }
 .tl-date {
-  font-family:var(--f-mono); font-size:.62rem;
+  font-family:var(--f-mono); font-size:.62rem; font-weight:700;
   letter-spacing:.12em; color:var(--ember);
   font-variant-numeric:tabular-nums; margin-bottom:.4rem;
 }
@@ -414,20 +471,35 @@ body {
   font-weight:700; color:var(--parchment); margin-bottom:.4rem;
 }
 .tl-desc { font-size:.8rem; color:var(--fog); line-height:1.6; max-width:16ch; }
+.tl-more {
+  display:none; font-family:var(--f-mono); font-size:.7rem;
+  color:var(--text); line-height:1.65; max-width:18ch;
+  margin-top:.6rem; border-top:1px solid rgba(138,122,106,.3);
+  padding-top:.6rem;
+}
+.tl-era.open .tl-more { display:block; }
+.tl-toggle {
+  font-family:var(--f-mono); font-size:.58rem;
+  color:rgba(138,122,106,.7); margin-top:.3rem;
+  transition:color .2s;
+}
+.tl-era:hover .tl-toggle { color:var(--ember); }
+.tl-era.open .tl-toggle { color:var(--ember); }
 
 /* ── QUOTE PULL ── */
 .pull {
   font-family:var(--f-display); font-style:italic;
   font-size:clamp(1.1rem,2.5vw,1.55rem);
-  color:var(--fog); line-height:1.6;
-  border-top:1px solid var(--fog); border-bottom:1px solid var(--fog);
+  color:var(--text); line-height:1.6;
+  border-top:1px solid rgba(138,122,106,.4);
+  border-bottom:1px solid rgba(138,122,106,.4);
   padding:1.4rem 0; margin:2.2rem 0; max-width:54ch;
 }
 
 /* ── FOOTER ── */
 #foot {
   padding:4rem; text-align:center;
-  border-top:1px solid rgba(74,62,52,.3);
+  border-top:1px solid rgba(138,122,106,.25);
 }
 .foot-glyph {
   font-family:var(--f-display); font-size:2.5rem;
@@ -453,6 +525,7 @@ body {
   #ch6 .ch-inner { flex-direction:column; padding:0 1.5rem; gap:2.5rem; }
   .skulls-aside { width:100%; position:static; }
   #tower-canvas { width:150px; height:225px; }
+  .tl-scroll { padding:3rem 1.5rem 2.5rem; }
 }
 @media(prefers-reduced-motion:reduce) {
   .hero-sea { animation:none; }
@@ -546,7 +619,7 @@ body {
       The Phoenicians came to Djerba to make the most expensive color in the world. They crushed thousands of sea snails to do it. The island smelled like death and sold its product for more than gold.
     </p>
     <div class="ch-body rv d3">
-      <p>The Phoenicians were the great sailors of the ancient world, and around 1200 BC they chose Djerba. What they found here was <em>murex</em> — a spiky sea snail in the coastal shallows. Inside each snail was a tiny gland holding a fluid that, when exposed to sunlight, turned a deep, unfading purple. <strong>Tyrian purple.</strong> The color of emperors and gods.</p>
+      <p>The <span class="term">Phoenicians<span class="tip">Ancient seafaring traders from the eastern Mediterranean — modern-day Lebanon. Master navigators and merchants who founded colonies across North Africa and Spain from around 1200 BC.</span></span> were the great sailors of the ancient world, and around 1200 BC they chose Djerba. What they found here was <span class="term">murex<span class="tip">A spiky, fist-sized sea snail found in Mediterranean shallows. Each one contains one tiny gland with a few drops of purple fluid. You need roughly 10,000 snails to make a single gram of dye.</span></span> — a spiky sea snail in the coastal shallows. Inside each snail was a tiny gland holding a fluid that, when exposed to sunlight, turned a deep, unfading purple. <strong><span class="term">Tyrian purple<span class="tip">The most valuable dye in the ancient world, made only from crushed murex snails. It took its name from Tyre, the great Phoenician city. The color was so rare it became the symbol of emperors, kings, and gods — and smelled like rotting fish while being made.</span></span>.</strong> The color of emperors and gods.</p>
       <p>To harvest it, you crushed thousands of snails at once. The flesh rotted. The fluid ran. The smell was so vile that ancient cities kept their dye factories on the outskirts, downwind. Djerba's purple was said to rival even the legendary purple of Tyre.</p>
       <p>A small flat island in the sea, <em>reeking of rot</em>, producing a fluid worth more per ounce than gold, worn only by the most powerful people in the world. The people who lived there couldn't afford to wear it. They just made it, and ships came and paid, and the cycle continued for centuries.</p>
     </div>
@@ -572,7 +645,7 @@ body {
       When Rome destroyed Carthage in 146 BC, they inherited everything — including Djerba. They didn't trust an island they couldn't reach by land. So they built a road straight to it across the sea. That road is still there.
     </p>
     <div class="ch-body rv d3">
-      <p>The Romans were engineers of control. An island that ships could reach but land armies couldn't was an island full of dangerous possibilities — smugglers, rebels, people who could hide things. So they built the <strong>El Kantara causeway</strong>: six kilometers of stone road across shallow sea, connecting Djerba to the North African mainland.</p>
+      <p>The Romans were engineers of control. An island that ships could reach but land armies couldn't was full of dangerous possibilities — smugglers, rebels, people who could hide things. So they built the <span class="term">El Kantara causeway<span class="tip">Six kilometers of stone road built across the shallow sea between Djerba and the North African mainland. "El Kantara" means "the bridge" in Arabic. Built by Rome around 100 BC, it still carries cars today under a modern road laid over it in 1951.</span></span>: six kilometers of stone road across shallow sea, connecting Djerba to the North African mainland.</p>
       <p>Think about what that meant. <em>One road in, one road out.</em> The Romans could tax every cart that crossed it, count every traveler, seal the island in an afternoon. The causeway that was supposed to connect Djerba to the world was really designed to keep it under watch.</p>
       <p>Their capital on the island was called <strong>Meninx</strong> — a trade crossroads linking Africa, the East, and Europe. Slaves, dye, grain, oil. All of it moved through Djerba.</p>
       <p>The causeway the Romans built two thousand years ago is still in use. They paved a modern road over it in 1951. <strong>When you drive to Djerba today, you drive on Roman stone.</strong></p>
@@ -597,30 +670,30 @@ body {
     <span class="eyebrow rv">586 BC – Present</span>
     <h2 class="ch-title rv d1">The Synagogue<br>Older Than Christ</h2>
     <p class="ch-lead rv d2">
-      In the middle of a Muslim island, there is a Jewish synagogue that may be 2,600 years old. The community that built it is still there. They have survived everything. <em>They are still being attacked.</em>
+      In the middle of a Muslim island, there is a Jewish synagogue that may be 2,600 years old. The two communities lived side by side for nearly two millennia. Then the attacks came — not from neighbors, but from the darkest edges of the world.
     </p>
     <div class="ch-body rv d3">
       <p>In 586 BC, the Babylonian king Nebuchadnezzar II destroyed Solomon's Temple in Jerusalem and drove the Jewish people into exile. According to legend, a group of priests carried a sacred stone from the Temple's ruins all the way to a small island in North Africa. They built a shelter for it. They called it <strong>El Ghriba</strong> — <em>"the miraculous."</em></p>
       <p>That shelter became a synagogue. <strong>That synagogue still stands today.</strong></p>
-      <p>El Ghriba may be the oldest synagogue in the world. It predates Christianity by six centuries. Its community survived the Phoenicians, the Romans, the Arab conquest, the Ottoman Empire, the French colonial period, and two world wars. At its peak, Djerba had around 4,500 Jewish residents — one of the most ancient Jewish communities in the Arab world.</p>
-      <p>Then the attacks started.</p>
+      <p>El Ghriba may be the oldest synagogue in the world. It predates Christianity by six centuries. Its community survived the Phoenicians, the Romans, the Arab conquest, the Ottoman Empire, the French colonial period, and two world wars. At its peak, Djerba had around 4,500 Jewish residents — one of the most ancient Jewish communities in the Arab world. For nearly two thousand years, the Jewish and Muslim communities of Djerba lived together in a coexistence rare in any era or any place.</p>
+      <p>Then the attacks came — three times in four decades, each one carried out by a lone individual driven by extremist ideology, condemned each time by the island's people.</p>
     </div>
     <div class="atk-list rv d3">
       <div class="atk-row">
         <span class="atk-yr">1985</span>
-        <div class="atk-txt">A Tunisian soldier opened fire into the synagogue compound. Five people killed, four of them Jewish worshippers.</div>
+        <div class="atk-txt">A gunman opened fire into the synagogue compound. Five people killed, four of them Jewish worshippers at prayer.</div>
       </div>
       <div class="atk-row">
         <span class="atk-yr">2002</span>
-        <div class="atk-txt">A 25-year-old linked to Al-Qaeda detonated a truck bomb outside El Ghriba during Passover. <strong>Twenty-one killed.</strong></div>
+        <div class="atk-txt">A man linked to Al-Qaeda detonated a truck bomb outside El Ghriba during Passover. <strong>Twenty-one people killed.</strong> The act was condemned worldwide.</div>
       </div>
       <div class="atk-row">
         <span class="atk-yr">2023</span>
-        <div class="atk-txt">A Tunisian National Guard officer opened fire during the annual pilgrimage. Five killed before another guardsman stopped him.</div>
+        <div class="atk-txt">An armed attacker opened fire during the annual El Ghriba pilgrimage. Five killed. Another officer stopped the attack. Mourners returned the following year.</div>
       </div>
     </div>
     <div class="ch-body rv d4">
-      <p>Every time, the community buried its dead. Every time, they came back. There are roughly <strong>1,100 Jewish residents</strong> on Djerba today. They have been there, unbroken, for 2,600 years.</p>
+      <p>Every time, the community buried its dead. Every time, they came back. There are roughly <strong>1,100 Jewish residents</strong> on Djerba today. They have been there, unbroken, for 2,600 years. The annual pilgrimage to El Ghriba still draws thousands of visitors from around the world — and the island receives them.</p>
     </div>
     <div class="secret rv d4" onclick="toggleSecret(this)">
       <div class="secret-hd">The Temple stone under the floor</div>
@@ -638,10 +711,10 @@ body {
       His name was Dragut. He went to sea at age twelve. By forty he was the most terrifying man in the Mediterranean. The Ottoman Empire made him Governor of Djerba, and he used it as his home port to raid, burn, and enslave for twenty years.
     </p>
     <div class="ch-body rv d3">
-      <p>Turgut Reis — "Dragut" to Europeans — was born in Anatolia around 1514. He started as a sailor, became a soldier, became a corsair. The corsairs were pirates operating under semi-official Ottoman sanction, raiding Christian ships and coastal towns across the entire Mediterranean.</p>
+      <p>Turgut Reis — "Dragut" to Europeans — was born in Anatolia around 1514. He started as a sailor, became a soldier, became a <span class="term">corsair<span class="tip">A corsair was a kind of state-sponsored pirate. Unlike common pirates who worked for themselves, corsairs operated under letters of permission from a government — in this case the Ottoman Empire. They split their profits with the state and were used as a kind of unofficial navy.</span></span>. The corsairs raided Christian ships and coastal towns under semi-official Ottoman sanction across the entire Mediterranean.</p>
       <p>Dragut was the best of them. He was called <strong>"the Drawn Sword of Islam"</strong> and "the Greatest Pirate Warrior of All Time." In 1539, the Ottomans made him Governor of Djerba. For the next twenty years, the island was his headquarters, his home port, his fortress.</p>
       <p>From Djerba, he organized raids on the Italian coast — burning villages, killing men, taking women and children as slaves. The Barbary corsairs raided as far north as <strong>Britain, Ireland, and Iceland</strong>. An estimated one million Europeans were enslaved by Barbary corsairs between 1500 and 1800.</p>
-      <p>Dragut was captured himself in 1540 — taken as a galley slave by the Genoese admiral Andrea Doria. He spent <em>two years chained to an oar</em> before another corsair ransomd him. He came back angrier than before.</p>
+      <p>Dragut was captured himself in 1540 — taken as a <span class="term">galley<span class="tip">A long, low warship propelled primarily by oars — typically rowed by slaves or condemned criminals chained to their benches. Galley slaves worked until they died or were ransomed. Mediterranean sea battles in this era were largely fought between fleets of galleys.</span></span> slave by the Genoese admiral Andrea Doria. He spent <em>two years chained to an oar</em> before another corsair ransomed him. He came back angrier than before.</p>
     </div>
     <div class="dossier rv d4">
       <strong>TURGUT REIS — DRAGUT</strong><br><br>
@@ -677,15 +750,30 @@ body {
         <p>On the morning of May 11, 1560, an Ottoman fleet of eighty-six galleys arrived under Admiral Piyale Pasha — with Dragut alongside him. The Christian fleet was anchored and unprepared. The battle lasted a few hours. <strong>Twenty-seven Christian galleys were captured or sunk.</strong> The rest scattered.</p>
         <p>What followed was a three-month siege of the Spanish fort. When it fell, the Spanish commander Don Álvaro de Sande was taken prisoner, along with roughly <strong>five thousand soldiers</strong>, hauled in chains to Istanbul and paraded through the city as trophies.</p>
         <p>Then the Ottomans built something.</p>
-        <p>From the bodies of the Spanish dead, they constructed <strong>Borj el-Jemajem</strong> — the Citadel of Skulls. A pyramid of human skulls and bones, twenty-five feet high and sixty feet around, on a public beach. Not hidden. Not buried. <em>On a beach.</em> Where every ship passing could see it. Where every traveler walked past it.</p>
+        <p>From the bodies of the Spanish dead, they constructed <strong><span class="term">Borj el-Jemajem<span class="tip">"Borj el-Jemajem" means Citadel of Skulls in Arabic. Built in 1560 from the bones of defeated Spanish soldiers on the beach at Djerba. It stood for 288 years as a monument to Ottoman power, visible to every ship passing through the straits.</span></span></strong> — the Citadel of Skulls. A pyramid of human skulls and bones, twenty-five feet high and sixty feet around, on a public beach. Not hidden. Not buried. <em>On a beach.</em> Where every ship passing could see it. Where every traveler walked past it.</p>
         <p>It stood until <strong>1848</strong> — nearly three hundred years — before local Christians obtained permission to dismantle it and give the remains a proper burial.</p>
-        <p>For three hundred years, a pile of human skulls stood on a beach. Children played near it. Fishermen walked past it every morning. Ships' captains stared at it from the water. It marked the high-water point of Ottoman power in the Mediterranean as clearly as anything ever could.</p>
+        <p>For three hundred years, a pile of human skulls stood on a beach. Children played near it. Fishermen walked past it every morning. Ships' captains stared at it from the water.</p>
       </div>
+
+      <div class="height-cmp rv d4" aria-label="Tower of Skulls height comparison">
+        <div class="hc-col">
+          <div class="hc-top">6 ft</div>
+          <div class="hc-bar" style="height:48px"></div>
+          <div class="hc-bot">Average person</div>
+        </div>
+        <div class="hc-col">
+          <div class="hc-top red">25 ft</div>
+          <div class="hc-bar red" style="height:200px"></div>
+          <div class="hc-bot">Tower of Skulls</div>
+        </div>
+        <div class="hc-note">Built entirely from<br>human bones.<br>Stood on a public<br>beach for 288 years.</div>
+      </div>
+
       <div class="battle-grid rv d4">
         <div class="b-cell"><div class="b-side">Ottoman Fleet</div><div class="b-val">86</div><div class="b-sub">galleys</div></div>
         <div class="b-cell"><div class="b-side">Spanish Alliance</div><div class="b-val">50+</div><div class="b-sub">galleys</div></div>
         <div class="b-cell"><div class="b-side">Battle Duration</div><div class="b-val">~4 hrs</div><div class="b-sub">then a 3-month siege</div></div>
-        <div class="b-cell"><div class="b-side">Christians Taken</div><div class="b-val">~5,000</div><div class="b-sub">marched to Istanbul</div></div>
+        <div class="b-cell"><div class="b-side">Prisoners Taken</div><div class="b-val">~5,000</div><div class="b-sub">marched to Istanbul</div></div>
         <div class="b-cell"><div class="b-side">Tower Height</div><div class="b-val">25 ft</div><div class="b-sub">skulls and bones</div></div>
         <div class="b-cell"><div class="b-side">Years It Stood</div><div class="b-val">~288</div><div class="b-sub">on a public beach</div></div>
       </div>
@@ -717,7 +805,7 @@ body {
     <div class="ch-body rv d3">
       <p>Djerba today is a tourist destination. Hotels line the beaches. People come from Europe for the sun. On the surface it looks like any Mediterranean island where the past has been smoothed down and varnished over for visitors.</p>
       <p>But the past refuses to behave here.</p>
-      <p>The Jewish community — 2,600 years old, the descendants of people who fled Babylon — is still here, still being attacked. The 2002 truck bomb at El Ghriba killed twenty-one people. The 2023 attack killed five. Between attacks, thousands of pilgrims still come from around the world for the annual El Ghriba festival, lighting candles in a building that has survived longer than most countries.</p>
+      <p>The Jewish community — 2,600 years old, the descendants of people who fled Babylon — is still here, still being targeted. The 2002 truck bomb at El Ghriba killed twenty-one people. The 2023 attack killed five. Between those events, thousands of pilgrims still come from around the world for the annual El Ghriba festival, lighting candles in a building that has survived longer than most countries. The island receives them.</p>
       <p>The Amazigh Berber people, who arrived before the Phoenicians, are still here. Their language is still spoken. Their culture practiced. They were here first, and every invader underestimated how quietly a people can survive.</p>
       <p>The <strong>El Kantara causeway</strong>, built by Romans two thousand years ago, still carries cars every day. <strong>El Ghriba synagogue</strong>, built to house a stone carried from a burning temple in 586 BC, still holds services on Friday nights. The <strong>harbor where Dragut loaded his stolen cargo</strong> is now a marina for pleasure boats.</p>
       <p>Where the Tower of Skulls once stood, there is a small commemorative plaque. The beach is clean. Children swim there now.</p>
@@ -733,24 +821,89 @@ body {
 <!-- ═══════════════════════════════════════ TIMELINE -->
 <section id="tl">
   <div class="tl-hd">
-    <span class="eyebrow rv" style="display:block;text-align:center">A thousand years at a time</span>
+    <span class="eyebrow rv" style="display:block;text-align:center">Click any era to dig deeper</span>
     <h2 class="tl-title rv d1">6,000 Years</h2>
   </div>
   <div class="tl-scroll" id="tl-scroll">
     <div class="tl-track">
-      <div class="tl-era"><div class="tl-date">~4000 BC</div><div class="tl-ttl">First Inhabitants</div><div class="tl-desc">Earliest evidence of settlement on the island.</div></div>
-      <div class="tl-era"><div class="tl-date">1200 BC</div><div class="tl-ttl">Amazigh Arrive</div><div class="tl-desc">Berber people settle; they never fully leave.</div></div>
-      <div class="tl-era"><div class="tl-date">~800 BC</div><div class="tl-ttl">Phoenician Traders</div><div class="tl-desc">Purple dye industry. The island smells like rot and wealth.</div></div>
-      <div class="tl-era"><div class="tl-date">586 BC</div><div class="tl-ttl">El Ghriba Founded</div><div class="tl-desc">Jewish exiles build what may be the world's oldest synagogue.</div></div>
-      <div class="tl-era"><div class="tl-date">146 BC</div><div class="tl-ttl">Rome Takes Over</div><div class="tl-desc">Carthage falls. The causeway is built. One road in, one out.</div></div>
-      <div class="tl-era"><div class="tl-date">7th Century</div><div class="tl-ttl">Arab Conquest</div><div class="tl-desc">Islam arrives. Old ways survive beneath the new ones.</div></div>
-      <div class="tl-era"><div class="tl-date">1539</div><div class="tl-ttl">Dragut Takes Djerba</div><div class="tl-desc">The most feared corsair in the Mediterranean sets up here.</div></div>
-      <div class="tl-era"><div class="tl-date">May 1560</div><div class="tl-ttl">Tower of Skulls</div><div class="tl-desc">Ottoman rout. 5,000 prisoners. A pyramid of bones on the beach.</div></div>
-      <div class="tl-era"><div class="tl-date">1848</div><div class="tl-ttl">Skulls Dismantled</div><div class="tl-desc">After 288 years, the tower is taken apart. The bones buried.</div></div>
-      <div class="tl-era"><div class="tl-date">1881</div><div class="tl-ttl">French Protectorate</div><div class="tl-desc">France colonizes Tunisia. The island absorbs another empire.</div></div>
-      <div class="tl-era"><div class="tl-date">1956</div><div class="tl-ttl">Independence</div><div class="tl-desc">Tunisia becomes a republic. Djerba becomes part of a new country.</div></div>
-      <div class="tl-era"><div class="tl-date">2002</div><div class="tl-ttl">El Ghriba Bombing</div><div class="tl-desc">Al-Qaeda truck bomb. 21 killed at the ancient synagogue.</div></div>
-      <div class="tl-era"><div class="tl-date">2023</div><div class="tl-ttl">Attack on Pilgrimage</div><div class="tl-desc">5 killed. The community returns the following year.</div></div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">~4000 BC</div><div class="tl-ttl">First Inhabitants</div>
+        <div class="tl-desc">Earliest evidence of settlement on the island.</div>
+        <div class="tl-more">Stone tools and middens suggest people lived here thousands of years before any written record. We don't know who they were or what language they spoke.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">1200 BC</div><div class="tl-ttl">Amazigh Arrive</div>
+        <div class="tl-desc">Berber people settle; they never fully leave.</div>
+        <div class="tl-more">The Amazigh came as part of the great Sea Peoples migrations that collapsed civilizations across the Bronze Age Mediterranean. They are the island's deepest roots — still here today, still speaking a language older than Rome.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">~800 BC</div><div class="tl-ttl">Phoenician Traders</div>
+        <div class="tl-desc">Purple dye industry. The island smells like rot and wealth.</div>
+        <div class="tl-more">Djerba's Tyrian purple was said to rival even the legendary output of Tyre itself. The dye works were kept at the island's edges — the smell was too much for anyone to live near. Emperors paid fortunes for the product; the workers lived in the stench.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">586 BC</div><div class="tl-ttl">El Ghriba Founded</div>
+        <div class="tl-desc">Jewish exiles build what may be the world's oldest synagogue.</div>
+        <div class="tl-more">Fleeing Babylon after the destruction of Solomon's Temple, a group of priests reportedly carried a sacred stone to Djerba and built their sanctuary around it. El Ghriba has stood — survived, prayed in, attacked, rebuilt — for 2,600 years.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">146 BC</div><div class="tl-ttl">Rome Takes Over</div>
+        <div class="tl-desc">Carthage falls. The causeway is built. One road in, one out.</div>
+        <div class="tl-more">Rome didn't just conquer Djerba — it engineered it. The six-kilometer El Kantara causeway was both a road and a leash. The island's Roman capital, Meninx, became a major trading hub for the entire western Mediterranean.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">7th Century</div><div class="tl-ttl">Arab Conquest</div>
+        <div class="tl-desc">Islam arrives. Old ways survive beneath the new ones.</div>
+        <div class="tl-more">Arab armies swept across North Africa, and Djerba became part of the Islamic world. The Jewish community stayed. The Amazigh stayed. New and old quietly layered on top of each other — the island's pattern repeating.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">1539</div><div class="tl-ttl">Dragut Takes Djerba</div>
+        <div class="tl-desc">The most feared corsair in the Mediterranean sets up here.</div>
+        <div class="tl-more">For twenty years Djerba was the operational base of Turgut Reis — "Dragut" — who raided from Britain to Iceland and enslaved an estimated tens of thousands of Europeans. The island gave him shelter, a port, and a fortress to return to.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">May 1560</div><div class="tl-ttl">Tower of Skulls</div>
+        <div class="tl-desc">Ottoman rout. 5,000 prisoners. A pyramid of bones on the beach.</div>
+        <div class="tl-more">The Christian alliance fleet, caught unprepared, was destroyed in hours. Five thousand prisoners were marched to Istanbul. The Ottomans then stacked the bones of the dead into a pyramid on the beach — 25 feet high — as a monument that stood for 288 years.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">1848</div><div class="tl-ttl">Skulls Dismantled</div>
+        <div class="tl-desc">After 288 years, the tower comes down. The bones are buried.</div>
+        <div class="tl-more">Local Christians petitioned for permission to dismantle Borj el-Jemajem and give the remains a proper burial. The bones of Spanish soldiers who had died in 1560 were finally interred — nearly three centuries after the battle.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">1881</div><div class="tl-ttl">French Protectorate</div>
+        <div class="tl-desc">France colonizes Tunisia. Another empire absorbs the island.</div>
+        <div class="tl-more">France established a protectorate over Tunisia, adding another layer to Djerba's deep stack of conquerors. The pattern held: the island took the new ruler in, survived the colonial era, and emerged on the other side.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">1956</div><div class="tl-ttl">Independence</div>
+        <div class="tl-desc">Tunisia becomes a republic. Djerba becomes part of a new country.</div>
+        <div class="tl-more">Tunisia gained independence from France in 1956. Djerba — which had been Phoenician, Roman, Arab, Norman, Ottoman, and French — became Tunisian. The island's oldest communities, Amazigh and Jewish, were already there before any of those identities existed.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">2002</div><div class="tl-ttl">El Ghriba Bombing</div>
+        <div class="tl-desc">Al-Qaeda truck bomb. 21 killed at the ancient synagogue.</div>
+        <div class="tl-more">A man with ties to Al-Qaeda detonated a truck bomb outside El Ghriba during the Passover pilgrimage. Twenty-one people died. The attack was widely condemned. The pilgrimage resumed the following year. The synagogue still stands.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
+      <div class="tl-era" onclick="toggleEra(this)">
+        <div class="tl-date">2023</div><div class="tl-ttl">Attack on Pilgrimage</div>
+        <div class="tl-desc">5 killed. The community returns the following year.</div>
+        <div class="tl-more">An armed attacker opened fire during the annual El Ghriba pilgrimage. Five people were killed before the attack was stopped. Thousands of pilgrims returned for the festival the next year. The synagogue that survived Babylon, Rome, and the Ottomans did not close its doors.</div>
+        <div class="tl-toggle">▸ more</div>
+      </div>
     </div>
   </div>
 </section>
@@ -789,12 +942,11 @@ body {
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
   const W=180, H=270;
-  const BONE='#c4b49a', DARK_BONE='#7a6a54', SHADOW='#0a0705', GLOW='rgba(122,18,18,';
+  const BONE='#c4b49a', DARK_BONE='#7a6a54', SHADOW='#0a0705', GLOW='rgba(212,64,64,';
 
   function skull(x,y,sz,alpha){
     ctx.save(); ctx.globalAlpha=alpha;
     const r=sz*.5;
-    // cranium
     ctx.beginPath();
     ctx.arc(x,y-r*.15,r,Math.PI,0,false);
     ctx.lineTo(x+r*.8,y+r*.35); ctx.lineTo(x+r*.5,y+r*.62);
@@ -802,11 +954,9 @@ body {
     ctx.closePath();
     ctx.fillStyle=BONE; ctx.fill();
     ctx.strokeStyle=DARK_BONE; ctx.lineWidth=.4; ctx.stroke();
-    // eyes
     ctx.fillStyle=SHADOW;
     ctx.beginPath(); ctx.ellipse(x-r*.28,y-r*.05,r*.2,r*.17,0,0,Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(x+r*.28,y-r*.05,r*.2,r*.17,0,0,Math.PI*2); ctx.fill();
-    // nose
     ctx.beginPath(); ctx.moveTo(x,y+r*.12); ctx.lineTo(x-r*.1,y+r*.3); ctx.lineTo(x+r*.1,y+r*.3); ctx.closePath(); ctx.fill();
     ctx.restore();
   }
@@ -822,9 +972,8 @@ body {
   function render(prog){
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle='#0d0a07'; ctx.fillRect(0,0,W,H);
-    // base glow
     const g=ctx.createRadialGradient(W/2,H-10,0,W/2,H-10,90);
-    g.addColorStop(0,GLOW+'.28)'); g.addColorStop(1,GLOW+'0)');
+    g.addColorStop(0,GLOW+'.22)'); g.addColorStop(1,GLOW+'0)');
     ctx.fillStyle=g; ctx.fillRect(0,H-100,W,100);
     if(prog<=0) return;
     let shown=0, target=Math.floor(TOTAL*prog);
@@ -837,7 +986,6 @@ body {
         shown++;
       }
     }
-    // apex glow when nearly done
     if(prog>.88){
       const ag=ctx.createRadialGradient(W/2,H-248,0,W/2,H-248,28);
       ag.addColorStop(0,`rgba(196,180,154,${(prog-.88)*4*.2})`);
@@ -895,14 +1043,39 @@ body {
 /* ── SECRET TOGGLE ── */
 function toggleSecret(el){ el.classList.toggle('open'); }
 
+/* ── TIMELINE ERA EXPAND ── */
+function toggleEra(el){
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.tl-era.open').forEach(e=>{ e.classList.remove('open'); e.querySelector('.tl-toggle').textContent='▸ more'; });
+  if(!wasOpen){
+    el.classList.add('open');
+    el.querySelector('.tl-toggle').textContent='▾ less';
+  }
+}
+
+/* ── VOCABULARY TOOLTIPS (mobile tap) ── */
+(function(){
+  document.querySelectorAll('.term').forEach(t=>{
+    t.addEventListener('click',e=>{
+      e.stopPropagation();
+      const wasOpen=t.classList.contains('show');
+      document.querySelectorAll('.term.show').forEach(x=>x.classList.remove('show'));
+      if(!wasOpen) t.classList.add('show');
+    });
+  });
+  document.addEventListener('click',()=>{
+    document.querySelectorAll('.term.show').forEach(x=>x.classList.remove('show'));
+  });
+})();
+
 /* ── TIMELINE DRAG ── */
 (function(){
   const el=document.getElementById('tl-scroll');
   if(!el) return;
-  let down=false,startX,sl;
-  el.addEventListener('mousedown',e=>{ down=true; startX=e.pageX-el.offsetLeft; sl=el.scrollLeft; });
+  let down=false,startX,sl,moved=false;
+  el.addEventListener('mousedown',e=>{ down=true; moved=false; startX=e.pageX-el.offsetLeft; sl=el.scrollLeft; });
   el.addEventListener('mouseleave',()=>down=false);
   el.addEventListener('mouseup',()=>down=false);
-  el.addEventListener('mousemove',e=>{ if(!down) return; e.preventDefault(); el.scrollLeft=sl-(e.pageX-el.offsetLeft-startX); });
+  el.addEventListener('mousemove',e=>{ if(!down) return; e.preventDefault(); moved=true; el.scrollLeft=sl-(e.pageX-el.offsetLeft-startX); });
 })();
 </script>
