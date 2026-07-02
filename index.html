@@ -1,5 +1,8 @@
 <title>Djerba: An Island Written in Blood</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Six thousand years of conquest, plague, piracy, and prayer on North Africa's most ancient island — a dark history of Djerba for those who can handle it.">
+<meta name="theme-color" content="#0a0705">
 
 <style>
 :root {
@@ -85,6 +88,17 @@ body {
   opacity:.45;
   animation:seaBreathe 9s ease-in-out infinite;
 }
+.hero-map {
+  position:absolute; left:50%; bottom:8%; transform:translateX(-50%);
+  width:min(90vw,640px); height:auto; opacity:.35; z-index:0;
+}
+.hero-map path { fill:none; stroke:var(--fog); stroke-width:1; }
+.hero-map .isle { fill:var(--sea); stroke:var(--gold); stroke-width:.8; opacity:.8; }
+.hero-map circle { fill:var(--ember); opacity:0; animation:shipBlink 6s ease-in-out infinite; }
+.hero-map circle:nth-child(4) { animation-delay:1.4s; }
+.hero-map circle:nth-child(5) { animation-delay:2.9s; }
+.hero-map circle:nth-child(6) { animation-delay:4.2s; }
+@keyframes shipBlink { 0%,80%,100%{opacity:0} 40%{opacity:.9} }
 @keyframes seaBreathe {
   0%,100% { opacity:.35; transform:scaleY(1); }
   50%      { opacity:.55; transform:scaleY(1.06); }
@@ -290,10 +304,38 @@ body {
   color:var(--fog); margin-top:.25rem;
 }
 
+/* ── MUREX DRIP ── */
+.murex-wrap {
+  display:flex; align-items:center; gap:1.2rem;
+  margin:2.2rem 0; max-width:60ch;
+}
+.murex-wrap svg { flex-shrink:0; width:52px; height:52px; }
+.murex-drop {
+  fill:#7a2a5e; transform-origin:center;
+  animation:drip 3.2s ease-in infinite;
+}
+@keyframes drip {
+  0%   { transform:translateY(-2px) scaleY(.8); opacity:0; }
+  15%  { opacity:1; }
+  70%  { transform:translateY(22px) scaleY(1.15); opacity:1; }
+  85%  { opacity:0; }
+  100% { opacity:0; transform:translateY(-2px) scaleY(.8); }
+}
+.murex-note {
+  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.06em;
+  color:var(--fog); line-height:1.7;
+}
+.murex-note strong { color:#c8779e; }
+
 /* ── ROMAN CAUSEWAY VIZ ── */
+.causeway-lbl {
+  display:block; margin:2.2rem 0 .8rem; max-width:60ch;
+  font-family:var(--f-mono); font-size:.62rem;
+  letter-spacing:.1em; color:var(--fog);
+}
 .causeway {
   display:flex; align-items:center;
-  margin:2.2rem 0; max-width:60ch; height:50px; position:relative;
+  margin:0 0 2.2rem; max-width:60ch; height:36px; position:relative;
 }
 .causeway-post { width:2px; height:36px; background:var(--fog); flex-shrink:0; }
 .causeway-post.end { background:var(--ember); }
@@ -304,12 +346,6 @@ body {
     var(--void) 18px, var(--void) 20px);
   position:relative;
 }
-.causeway-lbl {
-  position:absolute; top:-1.7rem; left:0;
-  font-family:var(--f-mono); font-size:.56rem;
-  letter-spacing:.12em; color:var(--fog); white-space:nowrap;
-}
-
 /* ── ATTACK TIMELINE ── */
 .atk-list { margin:2.2rem 0; max-width:60ch; }
 .atk-row {
@@ -323,6 +359,26 @@ body {
   padding-top:.1rem;
 }
 .atk-txt { font-size:.9rem; color:var(--text); line-height:1.65; }
+
+/* ── RAID MAP ── */
+.raid-map-wrap { margin:2.2rem 0; max-width:60ch; }
+.raid-map-cap {
+  font-family:var(--f-mono); font-size:.58rem; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--fog); text-align:center; margin-bottom:.6rem;
+}
+.raid-map { width:100%; max-width:380px; height:auto; display:block; margin:0 auto; }
+.raid-map line { stroke:var(--fog); stroke-width:1; stroke-dasharray:3 3; opacity:.35; transition:opacity .2s,stroke .2s; }
+.raid-map circle { fill:var(--ember); transition:r .2s; }
+.raid-map .raid-center { fill:var(--gold-hi); }
+.raid-map text {
+  font-family:var(--f-mono); font-size:8px; fill:var(--fog);
+  opacity:0; transition:opacity .2s;
+}
+.raid-map .raid-center-lbl { opacity:1; fill:var(--gold-hi); font-size:9px; }
+.raid-node { cursor:pointer; outline:none; }
+.raid-node:hover line, .raid-node:focus line, .raid-node.show line { opacity:1; stroke:var(--ember); }
+.raid-node:hover circle, .raid-node:focus circle, .raid-node.show circle { r:6; }
+.raid-node:hover text, .raid-node:focus text, .raid-node.show text { opacity:1; fill:var(--text-hi); }
 
 /* ── DRAGUT DOSSIER ── */
 .dossier {
@@ -514,6 +570,7 @@ body {
 /* ── RESPONSIVE ── */
 @media(max-width:768px) {
   .c-nav { display:none; }
+  .ch { padding:4.5rem 0; }
   .ch-inner,
   .ch:nth-child(even) .ch-inner {
     padding:0 1.5rem; align-items:flex-start; text-align:left;
@@ -525,7 +582,18 @@ body {
   #ch6 .ch-inner { flex-direction:column; padding:0 1.5rem; gap:2.5rem; }
   .skulls-aside { width:100%; position:static; }
   #tower-canvas { width:150px; height:225px; }
-  .tl-scroll { padding:3rem 1.5rem 2.5rem; }
+  .tl-scroll { padding:3rem 1.5rem 2.5rem; -webkit-overflow-scrolling:touch; }
+  .hero-facts { gap:1.8rem; }
+  .height-cmp { flex-wrap:wrap; gap:1.5rem; justify-content:center; }
+  .dossier { font-size:.68rem; padding:1.1rem; }
+  .raid-map { margin-left:auto; margin-right:auto; }
+}
+@media(max-width:480px) {
+  .hero-title { font-size:clamp(3.2rem,17vw,6rem); }
+  .hero-facts { gap:1.2rem 1.6rem; }
+  .stat-grid { grid-template-columns:repeat(2,1fr); }
+  .battle-grid { grid-template-columns:1fr; }
+  .atk-row { grid-template-columns:4rem 1fr; gap:1rem; }
 }
 @media(prefers-reduced-motion:reduce) {
   .hero-sea { animation:none; }
@@ -561,6 +629,15 @@ body {
 <!-- ═══════════════════════════════════════ HERO -->
 <section id="hero">
   <div class="hero-sea" aria-hidden="true"></div>
+  <svg class="hero-map" viewBox="0 0 640 220" aria-hidden="true">
+    <path d="M0 170 Q160 150 320 172 T640 168" />
+    <path class="isle" d="M230 165 Q260 145 320 150 Q400 148 420 168 Q400 190 320 188 Q260 192 230 165 Z" />
+    <circle cx="90" cy="130" r="3"></circle>
+    <circle cx="180" cy="90" r="3"></circle>
+    <circle cx="520" cy="110" r="3"></circle>
+    <circle cx="470" cy="60" r="3"></circle>
+    <circle cx="380" cy="70" r="3"></circle>
+  </svg>
   <span class="hero-eyebrow">Gulf of Gabès · Tunisia · North Africa</span>
   <h1 class="hero-title">DJERBA<em>The Island</em></h1>
   <p class="hero-deck">Six thousand years of conquest, plague, piracy, and prayer — all on a flat piece of land in the sea.</p>
@@ -629,6 +706,14 @@ body {
       <div class="stat-cell"><span class="stat-n">1200 BC</span><span class="stat-l">Phoenician arrival</span></div>
       <div class="stat-cell"><span class="stat-n">0</span><span class="stat-l">Locals who could afford it</span></div>
     </div>
+    <div class="murex-wrap rv d4">
+      <svg viewBox="0 0 52 52" aria-hidden="true">
+        <path d="M26 6c9 3 15 12 13 21-2 8-9 13-13 13s-11-5-13-13C11 18 17 9 26 6Z" fill="#3a2f24" stroke="#8a7a6a" stroke-width="1"/>
+        <path d="M26 10c5 4 8 10 6 16-1 4-4 7-6 7" fill="none" stroke="#8a7a6a" stroke-width=".8"/>
+        <circle class="murex-drop" cx="26" cy="42" r="3"/>
+      </svg>
+      <p class="murex-note">One <strong>murex</strong> snail yields a few drops of dye. It took <strong>10,000</strong> of them for a single gram of Tyrian purple.</p>
+    </div>
     <div class="secret rv d4" onclick="toggleSecret(this)">
       <div class="secret-hd">The Amazigh were here before all of them</div>
       <div class="secret-body">Before the Phoenicians, before anyone who left written records, the Amazigh — the Berber people — were already here. They arrived around 1200 BC as part of the sea-peoples migrations that shook the entire ancient Mediterranean. Through every conquest, every religion, every new flag — the Amazigh stayed. You can find their descendants on Djerba today, still speaking a version of a language older than Rome.</div>
@@ -650,11 +735,10 @@ body {
       <p>Their capital on the island was called <strong>Meninx</strong> — a trade crossroads linking Africa, the East, and Europe. Slaves, dye, grain, oil. All of it moved through Djerba.</p>
       <p>The causeway the Romans built two thousand years ago is still in use. They paved a modern road over it in 1951. <strong>When you drive to Djerba today, you drive on Roman stone.</strong></p>
     </div>
+    <span class="causeway-lbl rv d4">El Kantara — 6 km across the sea · built ~100 BC · still in use today</span>
     <div class="causeway rv d4" aria-label="El Kantara causeway, 6km across the sea">
       <div class="causeway-post"></div>
-      <div class="causeway-road">
-        <span class="causeway-lbl">El Kantara — 6 km across the sea · built ~100 BC · still in use today</span>
-      </div>
+      <div class="causeway-road"></div>
       <div class="causeway-post end"></div>
     </div>
     <div class="secret rv d4" onclick="toggleSecret(this)">
@@ -715,6 +799,19 @@ body {
       <p>Dragut was the best of them. He was called <strong>"the Drawn Sword of Islam"</strong> and "the Greatest Pirate Warrior of All Time." In 1539, the Ottomans made him Governor of Djerba. For the next twenty years, the island was his headquarters, his home port, his fortress.</p>
       <p>From Djerba, he organized raids on the Italian coast — burning villages, killing men, taking women and children as slaves. The Barbary corsairs raided as far north as <strong>Britain, Ireland, and Iceland</strong>. An estimated one million Europeans were enslaved by Barbary corsairs between 1500 and 1800.</p>
       <p>Dragut was captured himself in 1540 — taken as a <span class="term">galley<span class="tip">A long, low warship propelled primarily by oars — typically rowed by slaves or condemned criminals chained to their benches. Galley slaves worked until they died or were ransomed. Mediterranean sea battles in this era were largely fought between fleets of galleys.</span></span> slave by the Genoese admiral Andrea Doria. He spent <em>two years chained to an oar</em> before another corsair ransomed him. He came back angrier than before.</p>
+    </div>
+    <div class="raid-map-wrap rv d4">
+      <div class="raid-map-cap">Raid range from Djerba · tap a point</div>
+      <svg class="raid-map" viewBox="0 0 300 240" aria-label="Map of Barbary corsair raid range radiating from Djerba">
+        <g class="raid-node" tabindex="0"><line x1="255" y1="205" x2="70" y2="18"/><circle cx="70" cy="18" r="4"/><text x="70" y="10" text-anchor="middle">Iceland</text></g>
+        <g class="raid-node" tabindex="0"><line x1="255" y1="205" x2="55" y2="55"/><circle cx="55" cy="55" r="4"/><text x="55" y="46" text-anchor="middle">Ireland</text></g>
+        <g class="raid-node" tabindex="0"><line x1="255" y1="205" x2="95" y2="65"/><circle cx="95" cy="65" r="4"/><text x="95" y="56" text-anchor="middle">Britain</text></g>
+        <g class="raid-node" tabindex="0"><line x1="255" y1="205" x2="150" y2="105"/><circle cx="150" cy="105" r="4"/><text x="150" y="96" text-anchor="middle">France</text></g>
+        <g class="raid-node" tabindex="0"><line x1="255" y1="205" x2="95" y2="150"/><circle cx="95" cy="150" r="4"/><text x="95" y="168" text-anchor="middle">Spain</text></g>
+        <g class="raid-node" tabindex="0"><line x1="255" y1="205" x2="205" y2="130"/><circle cx="205" cy="130" r="4"/><text x="205" y="121" text-anchor="middle">Italy</text></g>
+        <circle class="raid-center" cx="255" cy="205" r="6"/>
+        <text class="raid-center-lbl" x="255" y="225" text-anchor="middle">Djerba</text>
+      </svg>
     </div>
     <div class="dossier rv d4">
       <strong>TURGUT REIS — DRAGUT</strong><br><br>
@@ -1065,6 +1162,21 @@ function toggleEra(el){
   });
   document.addEventListener('click',()=>{
     document.querySelectorAll('.term.show').forEach(x=>x.classList.remove('show'));
+  });
+})();
+
+/* ── RAID MAP (mobile tap) ── */
+(function(){
+  document.querySelectorAll('.raid-node').forEach(n=>{
+    n.addEventListener('click',e=>{
+      e.stopPropagation();
+      const wasOpen=n.classList.contains('show');
+      document.querySelectorAll('.raid-node.show').forEach(x=>x.classList.remove('show'));
+      if(!wasOpen) n.classList.add('show');
+    });
+  });
+  document.addEventListener('click',()=>{
+    document.querySelectorAll('.raid-node.show').forEach(x=>x.classList.remove('show'));
   });
 })();
 
